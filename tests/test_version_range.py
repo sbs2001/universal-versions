@@ -23,8 +23,8 @@ from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
 from univers.version_range import build_range_from_snyk_advisory_string
 from univers.version_range import from_gitlab_native
-from univers.versions import InvalidVersion
 from univers.versions import DatetimeVersion
+from univers.versions import InvalidVersion
 from univers.versions import NugetVersion
 from univers.versions import OpensslVersion
 from univers.versions import PypiVersion
@@ -551,12 +551,20 @@ def test_version_range_normalize_case3():
 
 
 def test_version_range_datetime():
-    assert DatetimeVersion("2000-01-01T01:02:03.1234Z") in DatetimeVersionRange.from_string("vers:datetime/*")
-    assert DatetimeVersion("2021-05-05T01:02:03Z") in DatetimeVersionRange.from_string("vers:datetime/>2021-01-01T01:02:03.1234Z|<2022-01-01T01:02:03.1234Z")
+    assert DatetimeVersion("2000-01-01T01:02:03.1234Z") in DatetimeVersionRange.from_string(
+        "vers:datetime/*"
+    )
+    assert DatetimeVersion("2021-05-05T01:02:03Z") in DatetimeVersionRange.from_string(
+        "vers:datetime/>2021-01-01T01:02:03.1234Z|<2022-01-01T01:02:03.1234Z"
+    )
     datetime_constraints = DatetimeVersionRange(
         constraints=(
-            VersionConstraint(comparator=">", version=DatetimeVersion(string="2000-01-01T01:02:03Z")),
-            VersionConstraint(comparator="<", version=DatetimeVersion(string="2002-01-01T01:02:03Z")),
+            VersionConstraint(
+                comparator=">", version=DatetimeVersion(string="2000-01-01T01:02:03Z")
+            ),
+            VersionConstraint(
+                comparator="<", version=DatetimeVersion(string="2002-01-01T01:02:03Z")
+            ),
         )
     )
     assert DatetimeVersion("2001-01-01T01:02:03Z") in datetime_constraints
