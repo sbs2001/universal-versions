@@ -8,6 +8,7 @@ from univers.version_constraint import VersionConstraint
 from univers.versions import AlpineLinuxVersion
 from univers.versions import ArchLinuxVersion
 from univers.versions import ComposerVersion
+from univers.versions import DatetimeVersion
 from univers.versions import DebianVersion
 from univers.versions import EnhancedSemanticVersion
 from univers.versions import GentooVersion
@@ -218,3 +219,12 @@ def test_golang_version():
     assert GolangVersion("v0.1.1") >= GolangVersion("v0.1.1")
     assert GolangVersion("v0.1.1") <= GolangVersion("v0.1.1")
     assert GolangVersion("v0.1.1") <= GolangVersion("v0.1.2")
+
+
+def test_datetime_version():
+    assert DatetimeVersion("2023-10-28T18:30:00Z") == DatetimeVersion("2023-10-28T18:30:00Z") 
+    assert DatetimeVersion("2023-01-11T10:10:10Z") > DatetimeVersion("2023-01-10T10:10:10Z")
+    assert DatetimeVersion("2022-10-28T18:30:00Z") < DatetimeVersion("2023-10-28T18:30:00Z") 
+    assert DatetimeVersion("2022-10-28T18:30:00Z") <= DatetimeVersion("2023-10-28T18:30:00Z")
+    assert DatetimeVersion("2024-10-28T18:30:00Z") > DatetimeVersion("2023-10-28T18:30:00Z")
+    assert DatetimeVersion("2023-10-28T19:30:00+01:00") == DatetimeVersion("2023-10-28T18:30:00Z")

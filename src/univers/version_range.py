@@ -959,6 +959,11 @@ class GolangVersionRange(VersionRange):
     }
 
 
+class DatetimeVersionRange(VersionRange):
+    scheme = "datetime"
+    version_class = versions.DatetimeVersion
+
+
 class GenericVersionRange(VersionRange):
     scheme = "generic"
     version_class = versions.SemverVersion
@@ -1419,6 +1424,7 @@ RANGE_CLASS_BY_SCHEMES = {
     "openssl": OpensslVersionRange,
     "mattermost": MattermostVersionRange,
     "conan": ConanVersionRange,
+    "datetime": DatetimeVersionRange,
 }
 
 PURL_TYPE_BY_GITLAB_SCHEME = {
