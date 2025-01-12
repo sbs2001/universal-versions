@@ -1536,4 +1536,3 @@ PURL_TYPE_BY_GITLAB_SCHEME = {
     "packagist": "composer",
     "conan": "conan",
 }
-
